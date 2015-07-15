@@ -153,6 +153,8 @@ add_subdirectory( Encoder )
 add_subdirectory( LIDAR )
 add_subdirectory( Car )
 add_subdirectory( Utils )
+add_subdirectory( WheelOdometry )
+
 
 set( PROTO_DIR Messages )
 
@@ -174,6 +176,7 @@ set( _PROTO_SRCS
     ${PROTO_DIR}/Lidar.proto
     ${PROTO_DIR}/NodeCamMessage.proto
     ${PROTO_DIR}/NodeCar.proto
+    ${PROTO_DIR}/WheelOdometry.proto
 )
 
 PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${_PROTO_SRCS})
@@ -219,7 +222,7 @@ list(APPEND HAL_HEADERS
     ${PROTO_DIR}/Reader.h
     ${PROTO_DIR}/Image.h
     ${PROTO_DIR}/ImageArray.h
-    ${PROTO_DIR}/ImagePyramid.h 
+    ${PROTO_DIR}/ImagePyramid.h
     ${PROTO_DIR}/Velodyne.h
     ${PROTO_DIR}/Matrix.h
     ${PROTO_DIR}/Pose.h

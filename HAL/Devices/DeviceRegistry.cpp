@@ -5,6 +5,7 @@
 #include <HAL/IMU/IMUDevice.h>
 #include <HAL/LIDAR/LIDARDevice.h>
 #include <HAL/Posys/PosysDevice.h>
+#include <HAL/WheelOdometry/WheelOdometryDevice.h>
 #include <HAL/Car/CarDevice.h>
 
 namespace hal
@@ -128,6 +129,7 @@ template class DeviceRegistry<hal::EncoderDriverInterface>;
 template class DeviceRegistry<hal::IMUDriverInterface>;
 template class DeviceRegistry<hal::LIDARDriverInterface>;
 template class DeviceRegistry<hal::PosysDriverInterface>;
+template class DeviceRegistry<hal::WheelOdometryDriverInterface>;
 template class DeviceRegistry<hal::CarDriverInterface>;
 
 }
