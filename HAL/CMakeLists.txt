@@ -154,6 +154,8 @@ add_subdirectory( LIDAR )
 add_subdirectory( Car )
 add_subdirectory( Utils )
 add_subdirectory( WheelOdometry )
+add_subdirectory( Poses )
+
 
 
 set( PROTO_DIR Messages )

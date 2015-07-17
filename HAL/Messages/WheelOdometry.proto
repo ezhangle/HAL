@@ -12,6 +12,5 @@ message WheelOdometryMsg{
     optional double rear_left = 7;
     optional double rear_right = 8;
     optional double speed = 9;
-
 }
 

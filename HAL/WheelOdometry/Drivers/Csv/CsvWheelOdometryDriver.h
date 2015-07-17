@@ -4,6 +4,8 @@
 #include <fstream>
 
 #include <HAL/WheelOdometry/WheelOdometryDriverInterface.h>
+#include <HAL/Messages/Pose.h>
+
 
 namespace hal {
 
@@ -16,6 +18,16 @@ public:
     ~CsvWheelOdometryDriver();
 
     void RegisterWheelOdometryDataCallback(WheelOdometryDriverDataCallback callback);
+    void RegisterWheelOdometryFinishedLoadingDataCallback(WheelOdometryDriverFinishedLoadingDataCallback callback);
+
+
+    Sophus::SE3Group<double> IntegrateWheelSpeed( const double start_time,
+                                      const std::vector<WheelOdometryMsg>& measurements,
+                                      const double end_time);
+
+    std::vector<hal::PoseMsg> IntegrateWheelSpeed(
+                              const std::vector<WheelOdometryMsg>& measurements);
+
     bool IsRunning() const override {
       return m_bShouldRun;
     }
@@ -35,6 +47,8 @@ private:
     double                            m_dNextTimePPS;
     std::thread                       m_DeviceThread;
     WheelOdometryDriverDataCallback   m_WheelOdometryCallback;
+    WheelOdometryDriverFinishedLoadingDataCallback   m_WheelOdometryFinishedCallback;
+
 
 };
 

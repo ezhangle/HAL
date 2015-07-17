@@ -8,10 +8,10 @@
 namespace hal
 {
 
-class CsvFactory : public DeviceFactory<WheelOdometryDriverInterface>
+class CsvWheelOdometryFactory : public DeviceFactory<WheelOdometryDriverInterface>
 {
 public:
-    CsvFactory(const std::string& name)
+    CsvWheelOdometryFactory(const std::string& name)
         : DeviceFactory<WheelOdometryDriverInterface>(name)
     {
         Params() = {
@@ -31,6 +31,6 @@ public:
 };
 
 // Register this factory by creating static instance of factory
-static CsvFactory g_CsvFactory("csv");
+static CsvWheelOdometryFactory g_CsvWheelOdometryFactory("csv");
 
 }

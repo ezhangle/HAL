@@ -41,13 +41,33 @@ class WheelOdometry : public WheelOdometryDriverInterface {
     return;
   }
 
+  void RegisterWheelOdometryFinishedLoadingDataCallback(WheelOdometryDriverFinishedLoadingDataCallback callback){
+    m_finishedCallback = callback;
+    if( m_WheelOdometry ){
+      m_WheelOdometry->RegisterWheelOdometryFinishedLoadingDataCallback( m_finishedCallback );
+    }else{
+      std::cerr << "ERROR: no driver initialized!\n";
+    }
+    return;
+  }
+
+  Sophus::SE3Group<double> IntegrateWheelSpeed(const double start_time,
+                                                  const std::vector<WheelOdometryMsg>& measurements,
+                                                  const double end_time){
+    return m_WheelOdometry->IntegrateWheelSpeed(start_time, measurements, end_time);
+  }
+
+  std::vector<hal::PoseMsg> IntegrateWheelSpeed(
+                            const std::vector<WheelOdometryMsg>& measurements){
+    return m_WheelOdometry->IntegrateWheelSpeed(measurements);
+  }
 
   std::string GetDeviceProperty(const std::string& sProperty) {
     return m_WheelOdometry->GetDeviceProperty(sProperty);
   }
 
   bool IsRunning() const override {
-    return m_WheelOdometry->IsRunning();
+    return m_WheelOdometry && m_WheelOdometry->IsRunning();
   }
 
 
@@ -55,5 +75,6 @@ class WheelOdometry : public WheelOdometryDriverInterface {
   hal::Uri                                          m_URI;
   std::shared_ptr<WheelOdometryDriverInterface>     m_WheelOdometry;
   WheelOdometryDriverDataCallback                   m_callback;
+  WheelOdometryDriverFinishedLoadingDataCallback    m_finishedCallback;
 };
 } /* namespace hal */
